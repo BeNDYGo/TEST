@@ -31,6 +31,7 @@ async function checkAdmin() {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
             }  
         })
         const data = await response.json()
