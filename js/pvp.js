@@ -4,7 +4,12 @@ const userLableInfo = document.getElementById("userInfo")
 
 async function getUserInfo(username) {
     url = server + '/api/userInfo?username=' + username;
-    const response = await fetch(url)
+    const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
     
     if (response.ok) {
         const data = await response.json()

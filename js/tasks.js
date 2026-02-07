@@ -8,7 +8,12 @@ async function getTasks(subject, taskType = '', difficulty = ''){
             url += '&difficulty=' + encodeURIComponent(difficulty)
         }
         
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
 
         if (response.ok){
             return await response.json()
