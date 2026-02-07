@@ -1,3 +1,5 @@
+const server = 'https://880f-5-196-64-200.ngrok-free.app'
+
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     

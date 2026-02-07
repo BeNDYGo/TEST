@@ -1,11 +1,12 @@
+const server = 'https://880f-5-196-64-200.ngrok-free.app'
+
 async function getUserInfo(username) {
     const currentUser = localStorage.getItem('username')
     if (!currentUser) {
         return { error: 'not authenticated' }
     }
     
-    url = server + '/api/getUserAllInfo?username=' + username
-    respons = await fetch(url, {
+    const respons = await fetch(server + '/api/getUserAllInfo?username=' + username, {
         method: 'GET',
         headers: {
             'X-Username': currentUser,

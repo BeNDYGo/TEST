@@ -1,3 +1,5 @@
+const server = 'https://880f-5-196-64-200.ngrok-free.app'
+
 document.addEventListener('DOMContentLoaded', async function () {
     const username = localStorage.getItem('username');
 

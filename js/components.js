@@ -26,8 +26,7 @@ function goToAdmin() {
 async function checkAdmin() {
     const username = localStorage.getItem('username')
     if (username) {
-        const url = server + '/api/userInfo?username=' + username
-        const response = await fetch(url, {
+        const response = await fetch(server + '/api/userInfo?username=' + username, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

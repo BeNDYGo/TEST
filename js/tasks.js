@@ -1,3 +1,5 @@
+const server = 'https://880f-5-196-64-200.ngrok-free.app'
+
 async function getTasks(subject, taskType = '', difficulty = ''){
     try {
         let url = server + '/api/getAllTasks?subject=' + encodeURIComponent(subject)
