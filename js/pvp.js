@@ -7,8 +7,7 @@ async function getUserInfo(username) {
     const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': 'true'
+                'Content-Type': 'application/json'
             }
         })
     

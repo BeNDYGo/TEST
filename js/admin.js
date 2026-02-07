@@ -6,8 +6,10 @@ async function getUserInfo(username) {
     
     url = server + '/api/getUserAllInfo?username=' + username
     respons = await fetch(url, {
+        method: 'GET',
         headers: {
-            'X-Username': currentUser
+            'X-Username': currentUser,
+            'Content-Type': 'application/json'
         }
     })
     const data = await respons.json()
@@ -68,7 +70,8 @@ roleBtn.addEventListener('click', async () => {
     try {
         const response = await fetch(server + '/api/changeRole?username=' + currentUserInfo.username + '&role=' + newRole, {
             headers: {
-                'X-Username': currentUser
+                'X-Username': currentUser,
+                'Content-Type': 'application/json'
             }
         })
         const data = await response.json()

@@ -30,8 +30,7 @@ async function checkAdmin() {
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': 'true'
+                'Content-Type': 'application/json'
             }  
         })
         const data = await response.json()

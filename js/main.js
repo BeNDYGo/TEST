@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     try {
         const response = await fetch(server + '/api/userInfo?username=' + username, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' }
+            headers: { 'Content-Type': 'application/json'}
         });
 
         if (!response.ok) {
