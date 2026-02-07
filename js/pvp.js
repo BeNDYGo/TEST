@@ -7,7 +7,8 @@ async function getUserInfo(username) {
         const response = await fetch(server + '/api/userInfo?username=' + username, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
             }
         })
         const data = await safeJson(response, 'pvp:getUserInfo')

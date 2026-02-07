@@ -8,7 +8,8 @@ async function getUserInfo(username) {
             method: 'GET',
             headers: {
                 'X-Username': currentUser,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
             }
         })
         const data = await safeJson(response, 'admin:getUserInfo')
@@ -76,7 +77,8 @@ roleBtn.addEventListener('click', async () => {
         const response = await fetch(server + '/api/changeRole?username=' + currentUserInfo.username + '&role=' + newRole, {
             headers: {
                 'X-Username': currentUser,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': 'true'
             }
         })
         const data = await safeJson(response, 'admin:changeRole')
@@ -125,7 +127,8 @@ addTaskBtn.addEventListener('click', async () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-Username': currentUser
+                'X-Username': currentUser,
+                'ngrok-skip-browser-warning': 'true'
             },
             body: JSON.stringify({
                 task: fullTask,
