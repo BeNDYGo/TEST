@@ -12,8 +12,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             headers: { 'Content-Type': 'application/json'}
         });
 
-        const data = await safeJson(response);
+        const data = await safeJson(response, 'main:userInfo');
         if (!response.ok || !data) {
+            if (response.ok && !data) {
+                console.error('[main] Empty or non-JSON response from /api/userInfo')
+            }
             document.getElementById('guest-message').style.display = 'block';
             return;
         }
@@ -38,6 +41,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             drawPieChart(wins, losses);
         }
     } catch (err) {
+        console.error('[main] Failed to load user stats', err)
         document.getElementById('guest-message').style.display = 'block';
     }
 });

@@ -3,20 +3,26 @@ async function getUserInfo(username) {
     if (!currentUser) {
         return { error: 'not authenticated' }
     }
-    
-    const respons = await fetch(server + '/api/getUserAllInfo?username=' + username, {
-        method: 'GET',
-        headers: {
-            'X-Username': currentUser,
-            'Content-Type': 'application/json'
+    try {
+        const response = await fetch(server + '/api/getUserAllInfo?username=' + username, {
+            method: 'GET',
+            headers: {
+                'X-Username': currentUser,
+                'Content-Type': 'application/json'
+            }
+        })
+        const data = await safeJson(response, 'admin:getUserInfo')
+        if (!response.ok || !data) {
+            if (response.ok && !data) {
+                console.error('[admin:getUserInfo] Empty or non-JSON response')
+            }
+            return { error: 'invalid response' }
         }
-    })
-    const data = await safeJson(respons)
-    if (!data) {
-        return { error: 'invalid response' }
+        return data
+    } catch (err) {
+        console.error('[admin:getUserInfo] Request failed', err)
+        return { error: err.message }
     }
-    console.log(data)
-    return data
 }
 
 const checkButton = document.getElementById('check')
@@ -76,7 +82,7 @@ roleBtn.addEventListener('click', async () => {
                 'Content-Type': 'application/json'
             }
         })
-        const data = await safeJson(response)
+        const data = await safeJson(response, 'admin:changeRole')
         if (!data) {
             lableuserInfo.innerHTML += `<div class="error">Ошибка: invalid response</div>`
             return
@@ -132,7 +138,7 @@ addTaskBtn.addEventListener('click', async () => {
             })
         })
 
-        const data = await safeJson(response)
+        const data = await safeJson(response, 'admin:addTask')
         if (!data) {
             taskStatus.innerHTML = `<div class="error">Ошибка: invalid response</div>`
             return

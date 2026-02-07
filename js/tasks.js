@@ -15,12 +15,16 @@ async function getTasks(subject, taskType = '', difficulty = ''){
             }
         });
 
-        if (!response.ok) {
+        const data = await safeJson(response, 'getTasks')
+        if (!response.ok || !data) {
+            if (response.ok && !data) {
+                console.error('[getTasks] Empty or non-JSON response from /api/getAllTasks')
+            }
             return null
         }
-        const data = await safeJson(response)
         return data || null
     } catch (error){
+        console.error('[getTasks] Request failed', error)
         return null
     }
 }
@@ -60,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             });
             tasksDiv.innerHTML = htmlContent;
         } catch (error) {
+            console.error('[loadTasks] Failed to render tasks', error)
             tasksDiv.innerHTML = 'Error';
         }
     }
