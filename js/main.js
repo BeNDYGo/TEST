@@ -7,10 +7,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     try {
-        const response = await fetch(server + '/api/userInfo?username=' + username, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-        });
+        const response = await fetch(server + '/api/userInfo?username=' + username);
 
         if (!response.ok) {
             document.getElementById('guest-message').style.display = 'block';

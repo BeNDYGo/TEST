@@ -27,13 +27,7 @@ async function checkAdmin() {
     const username = localStorage.getItem('username')
     if (username) {
         const url = server + '/api/userInfo?username=' + username
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': 'true'
-            }  
-        })
+        const response = await fetch(url)
         const data = await response.json()
         console.log(data.role)
         if (data.role === 'admin') {

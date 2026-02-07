@@ -1,15 +1,10 @@
-const wsServer = 'ws://880f-5-196-64-200.ngrok-free.app'
+const wsServer = 'wss://880f-5-196-64-200.ngrok-free.app'
 const username = localStorage.getItem('username')
 const userLableInfo = document.getElementById("userInfo")
 
 async function getUserInfo(username) {
     url = server + '/api/userInfo?username=' + username;
-    const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
+    const response = await fetch(url)
     
     if (response.ok) {
         const data = await response.json()

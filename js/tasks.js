@@ -8,11 +8,7 @@ async function getTasks(subject, taskType = '', difficulty = ''){
             url += '&difficulty=' + encodeURIComponent(difficulty)
         }
         
-        const response = await fetch(url, {
-            headers: {
-                'ngrok-skip-browser-warning': 'true'
-            }
-        });
+        const response = await fetch(url);
 
         if (response.ok){
             return await response.json()
