@@ -1,5 +1,17 @@
 const server = 'https://880f-5-196-64-200.ngrok-free.app'
 
+async function safeJson(response) {
+    const contentType = response.headers.get('content-type') || ''
+    if (!contentType.includes('application/json')) {
+        return null
+    }
+    try {
+        return await response.json()
+    } catch (err) {
+        return null
+    }
+}
+
 document.getElementById('header-container').innerHTML = `
         <div class='header'>
         <div class='logo' onclick='goToMain()'>TEST</div>
@@ -32,7 +44,10 @@ async function checkAdmin() {
                 'Content-Type': 'application/json'
             }  
         })
-        const data = await response.json()
+        const data = await safeJson(response)
+        if (!response.ok || !data) {
+            return
+        }
         console.log(data.role)
         if (data.role === 'admin') {
             document.getElementById('auth-section').innerHTML += `

@@ -1,5 +1,3 @@
-const server = 'https://880f-5-196-64-200.ngrok-free.app'
-
 async function getUserInfo(username) {
     const currentUser = localStorage.getItem('username')
     if (!currentUser) {
@@ -13,7 +11,10 @@ async function getUserInfo(username) {
             'Content-Type': 'application/json'
         }
     })
-    const data = await respons.json()
+    const data = await safeJson(respons)
+    if (!data) {
+        return { error: 'invalid response' }
+    }
     console.log(data)
     return data
 }
@@ -75,7 +76,11 @@ roleBtn.addEventListener('click', async () => {
                 'Content-Type': 'application/json'
             }
         })
-        const data = await response.json()
+        const data = await safeJson(response)
+        if (!data) {
+            lableuserInfo.innerHTML += `<div class="error">Ошибка: invalid response</div>`
+            return
+        }
         if (data.error) {
             lableuserInfo.innerHTML += `<div class="error">Ошибка: ${data.error}</div>`
             return
@@ -127,7 +132,11 @@ addTaskBtn.addEventListener('click', async () => {
             })
         })
 
-        const data = await response.json()
+        const data = await safeJson(response)
+        if (!data) {
+            taskStatus.innerHTML = `<div class="error">Ошибка: invalid response</div>`
+            return
+        }
 
         if (data.error) {
             taskStatus.innerHTML = `<div class="error">Ошибка: ${data.error}</div>`

@@ -1,5 +1,3 @@
-const server = 'https://880f-5-196-64-200.ngrok-free.app'
-
 async function getTasks(subject, taskType = '', difficulty = ''){
     try {
         let url = server + '/api/getAllTasks?subject=' + encodeURIComponent(subject)
@@ -17,11 +15,11 @@ async function getTasks(subject, taskType = '', difficulty = ''){
             }
         });
 
-        if (response.ok){
-            return await response.json()
-        } else {
+        if (!response.ok) {
             return null
         }
+        const data = await safeJson(response)
+        return data || null
     } catch (error){
         return null
     }

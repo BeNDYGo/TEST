@@ -1,5 +1,3 @@
-const server = 'https://880f-5-196-64-200.ngrok-free.app'
-
 document.addEventListener('DOMContentLoaded', async function () {
     const username = localStorage.getItem('username');
 
@@ -14,12 +12,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             headers: { 'Content-Type': 'application/json'}
         });
 
-        if (!response.ok) {
+        const data = await safeJson(response);
+        if (!response.ok || !data) {
             document.getElementById('guest-message').style.display = 'block';
             return;
         }
 
-        const data = await response.json();
         const wins = data.wins || 0;
         const losses = data.losses || 0;
         const rating = data.rating || 0;

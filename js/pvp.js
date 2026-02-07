@@ -1,5 +1,4 @@
 const wsServer = 'wss://880f-5-196-64-200.ngrok-free.app'
-const server = 'https://880f-5-196-64-200.ngrok-free.app'
 const username = localStorage.getItem('username')
 const userLableInfo = document.getElementById("userInfo")
 
@@ -11,12 +10,11 @@ async function getUserInfo(username) {
             }
         })
     
-    if (response.ok) {
-        const data = await response.json()
-        return data
-    } else {
+    if (!response.ok) {
         return null
     }
+    const data = await safeJson(response)
+    return data || null
 }
 
 async function eloRender(){

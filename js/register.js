@@ -1,5 +1,17 @@
 const server = 'https://880f-5-196-64-200.ngrok-free.app'
 
+async function safeJson(response) {
+    const contentType = response.headers.get('content-type') || ''
+    if (!contentType.includes('application/json')) {
+        return null
+    }
+    try {
+        return await response.json()
+    } catch (err) {
+        return null
+    }
+}
+
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -28,7 +40,12 @@ document.getElementById('registerForm').addEventListener('submit', async functio
             })
         });
         
-        const result = await response.json();
+        const result = await safeJson(response);
+        if (!result) {
+            messageDiv.textContent = 'Ошибка сервера'
+            messageDiv.style.color = 'red'
+            return
+        }
         
         if (response.ok) {
             localStorage.setItem('username', username);
