@@ -4,21 +4,23 @@ async function safeJson(response, context = '') {
     const contentType = response.headers.get('content-type') || ''
     const label = context ? `[${context}] ` : ''
     if (!contentType.includes('application/json')) {
-        if (!response.ok) {
-            try {
-                const body = await response.text()
-                console.error(`${label}Non-JSON error response`, {
-                    status: response.status,
-                    statusText: response.statusText,
-                    body
-                })
-            } catch (err) {
-                console.error(`${label}Non-JSON error response`, {
-                    status: response.status,
-                    statusText: response.statusText,
-                    error: err
-                })
-            }
+        try {
+            const body = await response.text()
+            console.error(`${label}Non-JSON response`, {
+                status: response.status,
+                statusText: response.statusText,
+                contentType,
+                url: response.url,
+                body
+            })
+        } catch (err) {
+            console.error(`${label}Non-JSON response`, {
+                status: response.status,
+                statusText: response.statusText,
+                contentType,
+                url: response.url,
+                error: err
+            })
         }
         return null
     }

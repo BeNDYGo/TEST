@@ -3,18 +3,22 @@ const username = localStorage.getItem('username')
 const userLableInfo = document.getElementById("userInfo")
 
 async function getUserInfo(username) {
-    const response = await fetch(server + '/api/userInfo?username=' + username, {
+    try {
+        const response = await fetch(server + '/api/userInfo?username=' + username, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-    
-    if (!response.ok) {
+        const data = await safeJson(response, 'pvp:getUserInfo')
+        if (!response.ok || !data) {
+            return null
+        }
+        return data || null
+    } catch (err) {
+        console.error('[pvp:getUserInfo] Request failed', err)
         return null
     }
-    const data = await safeJson(response)
-    return data || null
 }
 
 async function eloRender(){

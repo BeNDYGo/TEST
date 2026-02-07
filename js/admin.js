@@ -13,9 +13,6 @@ async function getUserInfo(username) {
         })
         const data = await safeJson(response, 'admin:getUserInfo')
         if (!response.ok || !data) {
-            if (response.ok && !data) {
-                console.error('[admin:getUserInfo] Empty or non-JSON response')
-            }
             return { error: 'invalid response' }
         }
         return data

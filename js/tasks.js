@@ -17,9 +17,6 @@ async function getTasks(subject, taskType = '', difficulty = ''){
 
         const data = await safeJson(response, 'getTasks')
         if (!response.ok || !data) {
-            if (response.ok && !data) {
-                console.error('[getTasks] Empty or non-JSON response from /api/getAllTasks')
-            }
             return null
         }
         return data || null

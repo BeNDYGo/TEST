@@ -14,9 +14,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         const data = await safeJson(response, 'main:userInfo');
         if (!response.ok || !data) {
-            if (response.ok && !data) {
-                console.error('[main] Empty or non-JSON response from /api/userInfo')
-            }
             document.getElementById('guest-message').style.display = 'block';
             return;
         }
