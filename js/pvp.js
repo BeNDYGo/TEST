@@ -1,4 +1,4 @@
-const wsServer = 'wss://880f-5-196-64-200.ngrok-free.app'
+const wsServer = 'wss://7982-159-255-33-104.ngrok-free.app'
 const username = localStorage.getItem('username')
 const userLableInfo = document.getElementById("userInfo")
 
