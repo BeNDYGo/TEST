@@ -1,4 +1,4 @@
-const server = 'https://7982-159-255-33-104.ngrok-free.app'
+const server = 'https://7f37-159-255-33-104.ngrok-free.app'
 
 async function safeJson(response) {
     const contentType = response.headers.get('content-type') || ''
